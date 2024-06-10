@@ -90,9 +90,6 @@ const Header = () => {
                   onChange={handleToggle}
                   checked={darkMode}
                 />
-                {/* <button onClick={handleToggle}>
-        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      </button> */}
               </div>
             </div>
           </Col>
