@@ -13,8 +13,8 @@ This Check Weather App is built using React.js. It allows users to search for cu
 1. Clone the repository:
 
 ```bash
-git https://github.com/ajay-pondric/weather-information-app.git
-cd weather-information-app
+git https://github.com/ajay-pondric/check-weather-app.git
+cd check-weather-app
 ```
 2. Install dependencies:
 
