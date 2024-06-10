@@ -5,8 +5,9 @@ import Weather from "./Weather";
 import { useSelector } from "react-redux";
 
 const App = () => {
+  const darkMode = useSelector((state) => state.theme.darkMode);
   return(
-    <div className={`app-section`}>
+    <div className={`app ${darkMode ? 'dark' : 'light'}`}>
       <BrowserRouter>
       <Header />
       <Routes>

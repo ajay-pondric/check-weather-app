@@ -16,7 +16,7 @@ const Weather = () => {
   const [city, setCity] = useState("");
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { weatherData } = useSelector((state) => state.location);
+  const { weatherData, currentLocation } = useSelector((state) => state.location);
 
   const temp = weatherData?.main?.temp;
   const humidity = weatherData?.main?.humidity;
@@ -26,6 +26,10 @@ const Weather = () => {
 
   const handleWeatherResult = async (e) => {
     e.preventDefault();
+    if (!city) {
+      setError("Please enter a city or zip code.");
+      return;
+    }
     try {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0abb4b73083d6d13ed5741b429c5b542`
@@ -68,6 +72,7 @@ const Weather = () => {
                   </div>
                   <Button type="submit">Search</Button>
                 </div>
+                {error && <span className="err-msg">{error}</span>}
               </form>
             </div>
           </Row>
@@ -75,15 +80,24 @@ const Weather = () => {
       </div>
       <div className="weather-container">
         <Container>
+          <Row>
+            <Col md={12}>
+              <h3 className="city-name">{weatherData === null ? "Please allow location access" : currentLocation} </h3>
+            </Col>
+          </Row>
           <div className="weather-info-item">
             <Row>
               {weatherData && (
                 <>
-                  <Col md="12"><Clock /></Col>
+                  <Col md="12">
+                    <Clock />
+                  </Col>
                   <Col md={6}>
                     <div className="weather-heading">
                       <h4>Temperature: {(temp - 273.15).toFixed(2)}°C</h4>
-                      <img width={75} height={75}
+                      <img
+                        width={75}
+                        height={75}
                         src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                       />
                     </div>
